@@ -122,3 +122,32 @@ void loop() {
 ![IMG_20230225_210815_HDR](https://user-images.githubusercontent.com/58916022/221385737-3f7b7bab-1dcf-4984-9c2d-b3c11baa52d9.jpg)
 
 ## Code 2
+    
+Now, via browser, let's read the status of the button connected to D0. It is easy to do that, in the *body*, just add the lines:
+    
+```c
+  if(digitalRead(tecla) == LOW){
+   client.println("<p>Button pressed</p>");
+  } else{
+    client.println("<p>Button released</p>"); 
+  }
+```   
+
+Note, the status will be update only when you refresh the browser. Let's add in the *head* two commands marks. One to give a name to the tab:
+    
+```c
+    client.println("<title>PK2v2</title>"); 
+```
+    
+And the mark to refresh the web browser:
+    
+```c
+    client.println("<meta http-equiv='refresh' content='2'>");
+```
+    
+Results:
+    
+![image](https://user-images.githubusercontent.com/58916022/221423239-e2055585-ea05-4f3d-b888-98d2e0bf132b.png)
+
+## Code 3
+    
