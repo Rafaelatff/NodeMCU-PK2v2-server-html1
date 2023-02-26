@@ -33,20 +33,45 @@ The first structure that OpenGDB give us for the HTML code is:
 </body>
 </html>
 ```
-To understand better the code:
+To understand better the code and also learn more things:
 
 * Every HTML code uses marks/tags html: < > 
 * Every (or at least almost all) HTML code has an opening <example> and a closure </example>
 * Every HTML code is betwen <html> and </html>
 * To say the code is in HTML5 we need to add, before <html> is the line <!DOCTYPE html>.
-* We can inform the language by adding: <html lang="pt-bt"> (this helps search engines).
-* In HTML we have two main areas, the header (<head> </head>) and then the body (<body></body>).
+* We can inform the language by adding: (this helps search engines)
+```html
+  <html lang="pt-bt"> 
+```
+* In HTML we have two main areas, the header:
+```html
+    <head> </head>
+```
+* and then the body:
+```html
+    <body></body>
+```
 * Portuguese (latin, with acentuation) text must use UTF-8 instead of ASCII.
-* In the <head> area add: <meta charset="UTF-8">.
-* Above is tag without closure, but optionaly we can add the '/' at the code: <meta charset="UTF-8"/>.
-* To add a browser tab name we just add to <head> the following: <title>Tab Name</title>.
-* To create titles in the text that will be displayed, we can add text inside the tags <h1> </h1>.
-* <h2> </h2> follows the hierarchy, being a subtitle.
+* In the <head> area add:
+```html    
+    <meta charset="UTF-8">
+```
+* Above is tag without closure, but optionaly we can add the '/' at the code:
+```html
+<meta charset="UTF-8"/>
+```
+* To add a browser tab name we just add to <head> the following: 
+```html  
+  <title>Tab Name</title>
+```
+* To create titles in the text that will be displayed, we can add text inside the tags:
+```html
+  <h1> </h1>
+```
+* To follow the title hierarchy, we have the subtitles:
+```html  
+  <h2> </h2>
+```
 * To change the formatting of the text, we use CSS3 code inside the HTML5 code.
 
 ```html
@@ -63,7 +88,8 @@ To understand better the code:
 ```
   
 Now let's go back to our **C/C++** code. Let's do a simple code. To send the HTML code we will use the same class function that sends message to Serial Monitor terminal. It's C++ so we use and abuse of class functions. Our 'void loop()' will be like:
-  
+
+```c
 void loop() {
   // put your main code here, to run repeatedly:
   WiFiClient client = server_name.available();
@@ -91,6 +117,7 @@ void loop() {
   client.println("</body>");
   client.println("</html>");
 }
+```
   
 ![IMG_20230225_210815_HDR](https://user-images.githubusercontent.com/58916022/221385737-3f7b7bab-1dcf-4984-9c2d-b3c11baa52d9.jpg)
 
