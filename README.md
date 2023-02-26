@@ -14,6 +14,14 @@ We will start by declaring the WiFiServer type, with name 'server_name' and send
 WiFiServer server_name(80); // IP:door -> IP:80
 ```
 
+Then in the 'void setup()' we add the server configuration/setup for our 'server_name'. It uses a class function.
+
+```c
+  // Server configuration
+  server_name.begin();
+  Serial.println("Servidor inicializado");
+ ```
+
 To understand and help us a little bit with of HTML code, we will be using the [OpenGDB](https://www.onlinegdb.com) editor and learning from the [Curso em vídeo](https://www.youtube.com/@CursoemVideo/playlists) that was a recommendation from my brother about the subject.
 
 The first structure that OpenGDB give us for the HTML code is:
@@ -39,7 +47,7 @@ To understand better the code:
 * To add a browser tab name we just add to <head> the following: <title>Tab Name</title>.
 * To create titles in the text that will be displayed, we can add text inside the tags <h1> </h1>.
 * <h2> </h2> follows the hierarchy, being a subtitle.
-* To change the formatting of the text, we use CSS.
+* To change the formatting of the text, we use CSS3 code inside the HTML5 code.
 
 ```html
 <head>
@@ -53,6 +61,37 @@ To understand better the code:
 </style>      
 </head>
 ```
+  
+Now let's go back to our **C/C++** code. Let's do a simple code. To send the HTML code we will use the same class function that sends message to Serial Monitor terminal. It's C++ so we use and abuse of class functions. Our 'void loop()' will be like:
+  
+void loop() {
+  // put your main code here, to run repeatedly:
+  WiFiClient client = server_name.available();
+  if(!client){
+    return;
+  }
 
+  while(!client.available()){
+    delay(1);
+  }
+
+  client.println("HTTP/1.1 200 OK");
+  client.println("Content-Type: text/html");
+  client.println("");
+  client.println("<!DOCTYPE HTML>"); //Says that we will be using HTML5
+  client.println("<html>");
+  client.println("<head>");
+  //Check how to send UTF-8 by using an ASCII channel
+  //client.println("<meta charset=/"UTF-8/"/>"); //Use UTF-8 instead of ASCII -> to use BR char
+  client.println("</head>");
+  client.println("<body>");
+  //client.println("<meta http-equiv='refresh' content='2'>");
+  client.println("<h1>Hello World!</h1>");
+  client.println("<h2>Olá mundo!</h2>");
+  client.println("</body>");
+  client.println("</html>");
+}
+  
+![IMG_20230225_210815_HDR](https://user-images.githubusercontent.com/58916022/221385737-3f7b7bab-1dcf-4984-9c2d-b3c11baa52d9.jpg)
 
 ## Code 2
