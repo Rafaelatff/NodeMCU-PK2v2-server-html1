@@ -151,3 +151,17 @@ Results:
 
 ## Code 3
     
+Now, let's control the 3 LEDs of PK2v2.
+
+To understand better the functions that we will be using, we will go to 'Sketch' -> 'Include Library' -> 'Manage Libraries...'.    
+    
+![image](https://user-images.githubusercontent.com/58916022/221428657-cb1e5cee-21a5-4fd9-9bdb-f0fa7c049b30.png)
+
+Let's add boolean global variables to hold the status for the LEDs.
+
+```c
+boolean statusGreenLED = LOW;
+boolean statusYellowLED = LOW;
+boolean statusRedLED = LOW;
+```
+    
