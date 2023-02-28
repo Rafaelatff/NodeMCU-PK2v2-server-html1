@@ -148,14 +148,13 @@ And the mark to refresh the web browser:
 Results:
     
 ![image](https://user-images.githubusercontent.com/58916022/221423239-e2055585-ea05-4f3d-b888-98d2e0bf132b.png)
+    
+Tip: To understand better the functions that we will be using, or install new libraries, go to 'Sketch' -> 'Include Library' -> 'Manage Libraries...'.    
+![image](https://user-images.githubusercontent.com/58916022/221428657-cb1e5cee-21a5-4fd9-9bdb-f0fa7c049b30.png)
 
 ## Code 3
     
 Now, let's control the 3 LEDs of PK2v2.
-
-To understand better the functions that we will be using, we will go to 'Sketch' -> 'Include Library' -> 'Manage Libraries...'.    
-    
-![image](https://user-images.githubusercontent.com/58916022/221428657-cb1e5cee-21a5-4fd9-9bdb-f0fa7c049b30.png)
 
 Let's add boolean global variables to hold the status for the LEDs.
 
@@ -164,4 +163,45 @@ boolean statusGreenLED = LOW;
 boolean statusYellowLED = LOW;
 boolean statusRedLED = LOW;
 ```
+Then, inside the *body* part of the *html* code, we will be adding:
     
+```c
+// change LED status
+  String req = client.readStringUntil('\r');
+  Serial.println(req);
+  client.flush();
+  if(req.indexOf("greenLEDon") != -1){
+    digitalWrite(greenLED,HIGH);
+    statusGreenLED = HIGH;
+  } else if(req.indexOf("greenLEDoff")!=-1){
+    digitalWrite(greenLED,LOW);
+    statusGreenLED = LOW;
+  } else if(req.indexOf("yellowLEDon") != -1){
+    digitalWrite(yellowLED,HIGH);
+    statusYellowLED = HIGH;
+  } else if(req.indexOf("yellowLEDoff")!=-1){
+    digitalWrite(yellowLED,LOW);
+    statusYellowLED = LOW;
+  } else if(req.indexOf("redLEDon") != -1){
+    digitalWrite(redLED,HIGH);
+    statusRedLED = HIGH;
+  } else if(req.indexOf("redLEDoff")!=-1){
+    digitalWrite(redLED,LOW);
+    statusRedLED = LOW;
+  }
+  if(!statusGreenLED) client.println("<p>Green LED: <a href=\"greenLEDon\"><button>Turn green LED ON</button></a></p>");
+  else client.println("<p>greenLED <a href=\"greenLEDoff\"><button>Turn green LED OFF</button></a></p>");
+  if(!statusYellowLED) client.println("<p>Yellow LED: <a href=\"yellowLEDon\"><button>Turn yellow LED ON</button></a></p>");
+  else client.println("<p>yellowLED <a href=\"yellowLEDoff\"><button>Turn yellow LED OFF</button></a></p>");
+  if(!statusRedLED) client.println("<p>Red LED: <a href=\"redLEDon\"><button>Turn red LED ON</button></a></p>");
+  else client.println("<p>redLED <a href=\"redLEDoff\"><button>Turn red LED OFF</button></a></p>");    
+```
+
+Then, we will get as results:
+    
+ 
+  ![WhatsApp Video 2023-02-27 at 21 30 46 (3)](https://user-images.githubusercontent.com/58916022/221722525-c2443ecd-1d62-4ead-b7b1-4250225554fd.gif)
+  
+    
+    
+
